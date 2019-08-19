@@ -1,0 +1,51 @@
+@import '~assets/styles/core/variables'
+@import '~assets/styles/mixins/bem'
+
+button,
+.button,
+.btn
+  display: inline-block
+  appearance: none
+  border: 1px solid #ccc
+  background-color: #ccc
+  padding: 10px 20px
+  border-radius: 25px
+  font-weight: 600
+  color: #222
+  cursor: pointer
+  font-size: 16px
+  letter-spacing: 0.5px
+  transition: all 0.2s
+
+  &:hover
+    background-color: darken(#ccc, 10%)
+
+.button, .btn
+  +is(primary)
+    background-color: $brand-primary
+    border-color: $brand-primary
+    color: #fff
+    &:hover
+      background-color: darken($brand-primary, 10%)
+  +is(secondary)
+    background-color: $brand-secondary
+    border-color: $brand-secondary
+    color: #fff
+    &:hover
+      background-color: darken($brand-secondary, 20%)
+      border-color: darken($brand-secondary, 20%)
+  +is(tertiary)
+    background-color: $brand-tertiary
+    border-color: $brand-tertiary
+    color: darken($brand-secondary, 20%)
+    &:hover
+      background-color: darken($brand-tertiary, 10%)
+      border-color: darken($brand-tertiary, 10%)
+  +is(white)
+    background-color: #fff
+    color: $brand-primary
+    &:hover
+      background-color: darken(#fff, 10%)
+
+a.button, a.btn
+  text-decoration: none
