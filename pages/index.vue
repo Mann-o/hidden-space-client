@@ -1,19 +1,19 @@
 <template lang="pug">
   .page-index
     .page-index__intro
-      IntroText
-      GetInTouchForm
+      IntroText(id="more")
+      //- GetInTouchForm
 
     .page-index__spaces
       h2 Our Spaces
       ModelPreviewList(v-if="spaces")
         ModelPreview(
-          v-for="{ id, slug, images, name, city } in spaces"
+          v-for="{ id, slug, image, address, city } in spaces"
           :key="id"
           route="spaces"
           :slug="slug"
-          :imageUrl="images[0].url"
-          :title="name"
+          :main-image="image != null ? image.url : null"
+          :title="address"
           :subtitle="city"
           brief="Some placeholder text"
         )
@@ -29,27 +29,27 @@
           :options="[{ key: 'male', value: 'Male' }, { key: 'female', value: 'Female' }]"
           v-model="therapistFilters.gender"
         )
-        CustomSelect(
-          placeholder-text="Practice"
-          :options="[]"
-          v-model="therapistFilters.practice"
-        )
-        CustomSelect(
-          placeholder-text="Treatment"
-          :options="[]"
-          v-model="therapistFilters.treatment"
-        )
+        //- CustomSelect(
+        //-   placeholder-text="Practice"
+        //-   :options="[]"
+        //-   v-model="therapistFilters.practice"
+        //- )
+        //- CustomSelect(
+        //-   placeholder-text="Treatment"
+        //-   :options="[]"
+        //-   v-model="therapistFilters.treatment"
+        //- )
       .page-index__therapists__list
         ModelPreviewList(v-if="filteredTherapists")
           ModelPreview(
-            v-for="{ id, key, slug, profileImage, firstName, lastName, title, shortBiography } in filteredTherapists"
+            v-for="{ id, key, slug, image, firstNames, lastNames, fullNameWithTitle, biography } in filteredTherapists"
             :key="id"
             route="therapists"
             :slug="slug"
-            :imageUrl="profileImage.url"
-            :title="`${firstName} ${lastName}`"
-            :subtitle="title"
-            :brief="shortBiography"
+            :main-image="image != null ? image.url : null"
+            :title="`${firstNames} ${lastNames}`"
+            :subtitle="fullNameWithTitle"
+            :brief="biography"
           )
 
       .page-index__therapists__actions
@@ -106,9 +106,9 @@ export default {
 
   +has(intro)
     display: grid
+    grid-template-columns: 1fr
 
     +breakpoint(tablet)
-      grid-template-columns: repeat(2, 1fr)
       grid-gap: 8rem
 
   +has(spaces)

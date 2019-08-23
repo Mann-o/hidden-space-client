@@ -2,9 +2,9 @@
   .main-footer
     ArcGenerator(fill="#422d96" bg-fill="#fff" :rotate="true" position="top")
     WidthContainer
-      MainFooterNewsletterSignup
-      MainFooterPractitionerForm
-      MainFooterClientForm
+      //- MainFooterNewsletterSignup
+      //- MainFooterPractitionerForm
+      //- MainFooterClientForm
       .main-footer__columns
         .main-footer__column
           MainFooterSocial
@@ -55,5 +55,5 @@ export default {
       display: grid
       grid-template-columns: repeat(2, 1fr)
       grid-gap: 4rem
-      padding-top: 8rem
+      // padding-top: 8rem
 </style>

@@ -3,13 +3,13 @@
     .model-preview
       nuxt-link(:to="`/${route}/${slug}`")
 
-        .model-preview__image(:style="{ backgroundImage: `url(${API_URL + imageUrl})` }")
+        .model-preview__image(:style="{ backgroundImage }")
 
         .model-preview__overview
           h5.model-preview__title {{ title }}
           h6.model-preview__subtitle {{ subtitle }}
 
-        .model-preview__brief(v-html="$md.render(brief)")
+        .model-preview__brief(v-html="`${brief.slice(0, 100)}...`")
 
         .model-preview__fake-link
           span View Full Details &raquo;
@@ -34,9 +34,9 @@ export default {
       type: String,
       required: true,
     },
-    imageUrl: {
-      type: String,
+    mainImage: {
       required: true,
+      validator: (image) => ((typeof image === 'string') || (image == null)),
     },
     title: {
       type: String,
@@ -56,6 +56,11 @@ export default {
     ...mapState([
       'API_URL',
     ]),
+    backgroundImage () {
+      return (this.mainImage != null)
+        ? `url(${this.mainImage})`
+        : 'url(/images/missing-avatar.png)'
+    },
   },
 }
 </script>

@@ -4,7 +4,7 @@
     h1 Hidden Space is a specialist therapy unit for therapeutic practices and talking therapies.
 
     p Located in Newcastle City Centre, Hidden Space is both central and off the beaten track, offering convenience as well as privacy.
-    p We exist to service both practitioners and patients, find out more about what we do for both by following the links below.
+    p We exist to service both practitioners and patients. Find out more about what we do for both by following the links below.
 
     ul
       li

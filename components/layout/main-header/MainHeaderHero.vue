@@ -2,8 +2,8 @@
   .main-header-hero
     h1 Creating a safe place for everyone
     .main-header-hero__ctas
-      button.button.button--tertiary Get In Touch
-      button.button.button--secondary Find Out More
+      nuxt-link(to="/contact-us").button.button--tertiary Get In Touch
+      nuxt-link(to="#more").button.button--secondary Find Out More
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
     display: flex
     justify-content: center
 
-    button
+    .button
       padding-left: 1.8rem
       padding-right: 1.8rem
       white-space: nowrap

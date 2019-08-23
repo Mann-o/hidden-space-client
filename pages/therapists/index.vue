@@ -3,14 +3,14 @@
     MainHeaderPageHeroContent(title="Our Therapists" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="therapists")
       ModelPreview(
-        v-for="therapist in therapists"
-        :key="therapist.id"
+        v-for="{ id, slug, image, fullNameWithTitle, title, biography } in therapists"
+        :key="id"
         route="therapists"
-        :slug="therapist.slug"
-        :imageUrl="therapist.profileImage.url"
-        :title="`${therapist.firstName} ${therapist.lastName}`"
-        :subtitle="therapist.title"
-        :brief="therapist.shortBiography"
+        :slug="slug"
+        :main-image="image != null ? image.url : null"
+        :title="fullNameWithTitle"
+        :subtitle="title"
+        :brief="biography"
       )
 </template>
 
@@ -32,24 +32,10 @@ export default {
     ],
   }),
 
-  // async asyncData ({ app, store }) {
-  //   const { data: { data: { therapists } } } = await app.$axios.post(`${store.state.API_URL}/graphql`, {
-  //     query: `{
-  //       therapists {
-  //         id,
-  //         firstName,
-  //         lastName,
-  //         title,
-  //         shortBiography,
-  //         slug,
-  //         profileImage {
-  //           url,
-  //         },
-  //       },
-  //     }`,
-  //   })
-  //   return { therapists }
-  // },
+  async asyncData ({ app, store }) {
+    const { data: therapists } = await app.$axios.get('/api/therapists')
+    return { therapists }
+  },
 }
 </script>
 

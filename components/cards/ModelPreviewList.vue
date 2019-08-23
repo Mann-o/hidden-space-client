@@ -1,5 +1,5 @@
 <template lang="pug">
-  .model-preview-list(:style="{ gridTemplateColumns: `repeat(${columns}, 1fr)` }")
+  .model-preview-list
     slot
 </template>
 
@@ -22,6 +22,6 @@ export default {
 
 .model-preview-list
   display: grid
-  grid-template-columns: 1fr
+  grid-template-columns: repeat(4, 1fr)
   grid-gap: 8rem
 </style>

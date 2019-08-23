@@ -1,6 +1,6 @@
 <template lang="pug">
   .main-footer-copyright
-    p &copy; Copyright 2018 - Hidden Space
+    p &copy; Copyright 2019 - Hidden Space
 </template>
 
 <script>

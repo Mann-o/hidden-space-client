@@ -20,14 +20,13 @@ export default {
   // transform: translateY(-50%)
   text-align: center
   font-size: 2rem
-  padding: 0 2rem
 </style>
 
 <style lang="stylus">
 @import '~assets/styles/mixins/bem'
 
 .main-header-page-hero
-  padding: 8rem 0
+  padding: 4rem 0
 
   +has(breadcrumbs)
     text-align: center

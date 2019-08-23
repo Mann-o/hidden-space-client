@@ -3,13 +3,13 @@
     MainHeaderPageHeroContent(title="Our Spaces" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="spaces")
       ModelPreview(
-        v-for="space in spaces"
-        :key="space.id"
+        v-for="{ id, slug, image, address, city } in spaces"
+        :key="id"
         route="spaces"
-        :slug="space.slug"
-        :imageUrl="space.images[0].url"
-        :title="space.name"
-        :subtitle="space.city"
+        :slug="slug"
+        :main-image="image != null ? image.url : null"
+        :title="address"
+        :subtitle="city"
         brief="Some placeholder text"
       )
 </template>
@@ -33,7 +33,7 @@ export default {
   }),
 
   async asyncData ({ app: { $axios } }) {
-    const spaces = await $axios.get('/api/spaces')
+    const { data: spaces } = await $axios.get('/api/spaces')
     return { spaces }
   },
 }

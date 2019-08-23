@@ -14,6 +14,7 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   rules: {
+    'arrow-parens': ['error', 'always'],
     'comma-dangle': ['warn', 'always-multiline'],
     'no-alert': isProduction ? 'error' : 'off',
     'no-console': isProduction ? 'error' : 'off',
