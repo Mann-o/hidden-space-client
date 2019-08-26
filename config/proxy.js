@@ -4,7 +4,7 @@ export default {
       '^/api': '/api/v1',
     },
     target: (process.env.NODE_ENV === 'production')
-      ? 'https://portal.thehiddenspace.co.uk'
+      ? 'https://api.thehiddenspace.co.uk'
       : 'http://localhost:3333',
   },
 }
