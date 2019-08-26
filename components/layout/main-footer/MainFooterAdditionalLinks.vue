@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/styles/mixins/breakpoint'
+
 .main-footer-additional-links
   color: #fff
   font-size: 1.2rem
@@ -37,4 +39,16 @@ export default {
 
     &:hover
       text-decoration: underline
+
+  +breakpoint(desktop)
+    display: inline-block
+
+    ul
+      display: flex
+
+      li
+        text-align: left
+
+        &:not(:first-of-type)
+          margin-left: 2rem
 </style>

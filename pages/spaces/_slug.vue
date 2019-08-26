@@ -7,15 +7,26 @@
       .page-spaces-slug__space-info__overview
         h5 {{ space.address }}
         h6 {{ space.city }}
-        div(v-if="space.biography != null" v-html="space.biography")
+        div(v-if="space.biography != null" v-html="space.biography" style="padding-top:4rem")
 
       .page-spaces-slug__space-info__image
         img(:src="imageSrc")
         div(style="padding-top:2rem")
           nuxt-link.btn.btn--secondary(to="/contact-us") Book This Space
 
-    .page-spaces-slug__other-spaces(v-if="otherSpaces.length")
-      h5 Other Spaces
+    .page-spaces-slug__other-spaces(v-if="otherSpaces.length" style="padding-top: 8rem")
+      h5(style="padding-bottom:2rem") Other Spaces
+      ModelPreviewList
+        ModelPreview(
+          v-for="{ id, slug, image, address, city } in otherSpaces"
+          :key="id"
+          route="spaces"
+          :slug="slug"
+          :main-image="image != null ? image.url : null"
+          :title="address"
+          :subtitle="city"
+          brief="Some placeholder text"
+        )
 </template>
 
 <script>
@@ -24,6 +35,8 @@ export default {
 
   components: {
     MainHeaderPageHeroContent: () => import('@/components/layout/main-header/MainHeaderPageHeroContent'),
+    ModelPreview: () => import('@/components/cards/ModelPreview'),
+    ModelPreviewList: () => import('@/components/cards/ModelPreviewList'),
   },
 
   data: () => ({

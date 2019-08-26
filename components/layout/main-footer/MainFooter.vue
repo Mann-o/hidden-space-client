@@ -49,11 +49,10 @@ export default {
     align-items: center
 
   +breakpoint(desktop)
-    padding: 4rem 0
+    padding-bottom: 8rem
 
     +has(columns)
       display: grid
       grid-template-columns: repeat(2, 1fr)
       grid-gap: 4rem
-      // padding-top: 8rem
 </style>
