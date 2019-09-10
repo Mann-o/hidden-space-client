@@ -7,7 +7,7 @@
       .page-therapists-slug__therapist-info__overview
         h5 {{ therapist.fullNameWithTitle }}
         h6 {{ therapist.title }}
-        div(v-if="therapist.biography != null" v-html="therapist.biography")
+        div(v-if="therapist.biography != null" v-html="therapist.biography" style="padding-top:4rem")
 
       .page-therapists-slug__therapist-info__image
         img(:src="imageSrc")
@@ -20,8 +20,19 @@
           h5(style="font-size:1.4rem") Email
           a(:href="`mailto:${therapist.emailAddress}`") {{ therapist.emailAddress }}
 
-    .page-therapists-slug__other-spaces(v-if="otherTherapists.length")
-      h5 Other Therapists
+    .page-therapists-slug__other-therapists(v-if="otherTherapists.length" style="padding-top: 8rem")
+      h5(style="padding-bottom:2rem") Other Therapists
+      ModelPreviewList
+        ModelPreview(
+          v-for="{ id, slug, image, fullNameWithTitle, title, biography } in otherTherapists"
+          :key="id"
+          route="therapists"
+          :slug="slug"
+          :main-image="image != null ? image.url : null"
+          :title="fullNameWithTitle"
+          :subtitle="title"
+          :brief="biography"
+        )
 </template>
 
 <script>
@@ -30,6 +41,8 @@ export default {
 
   components: {
     MainHeaderPageHeroContent: () => import('@/components/layout/main-header/MainHeaderPageHeroContent'),
+    ModelPreview: () => import('@/components/cards/ModelPreview'),
+    ModelPreviewList: () => import('@/components/cards/ModelPreviewList'),
   },
 
   data: () => ({
@@ -55,8 +68,16 @@ export default {
     app: { $axios },
     params: { slug },
   }) {
-    const { data: therapist } = await $axios.get(`/api/therapists/${slug}`)
-    return { therapist }
+    const [{ data: therapist }, { data: otherTherapists }] = await Promise.all([
+      await $axios.get(`/api/therapists/${slug}`),
+      await $axios.get('/api/therapists'),
+    ])
+    return {
+      therapist,
+      otherTherapists: otherTherapists
+        .filter(({ id }) => (id !== therapist.id))
+        .slice(0, 4),
+    }
   },
 }
 </script>

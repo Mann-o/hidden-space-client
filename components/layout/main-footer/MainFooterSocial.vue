@@ -69,9 +69,14 @@ export default {
       transform: translateX(-50%) translateY(-50%)
 
   +breakpoint(desktop)
-    display: inline-grid
-    grid-template-columns: 1fr 7rem
+    display: grid
+    grid-template-columns: 25rem 1fr
+
+    h6
+      text-align: left
 
     +has(links)
+      margin: 0
+      justify-content: flex-start
       padding-left: 2rem
 </style>

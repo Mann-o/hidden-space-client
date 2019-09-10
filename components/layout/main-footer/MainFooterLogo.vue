@@ -10,10 +10,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~assets/styles/mixins/breakpoint'
+
 .main-footer-logo
   padding-top: 8rem
   text-align: center
 
   img
     max-width: 18rem
+
+  +breakpoint(desktop)
+    padding-top: 12rem
 </style>
