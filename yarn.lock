@@ -1237,10 +1237,10 @@
     consola "^2.5.6"
     http-proxy-middleware "^0.19.1"
 
-"@nuxtjs/pwa@^3.0.0-beta.18":
-  version "3.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-3.0.0-beta.18.tgz#5205c21237d2cab5d2ac09301306a7b708376867"
-  integrity sha512-t9fpdHsJKWgd5qxsIcJmCH8sJ+iplpkPi+XeAgsE2rBasXVw675TP6+WMSlEEkZF/4D4xl2m0upimNLb0rzVOA==
+"@nuxtjs/pwa@^3.0.0-beta.19":
+  version "3.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-3.0.0-beta.19.tgz#4685c8137a5b588126b3ee4d469f6806423f958f"
+  integrity sha512-5c7CB2qrrlpu7BmJeWX9GN//uK1SiEzBbT+ykH11ZfUxQyXiO3QTm1f6tTOnG/P5v4kRIGYdBr0wmRbA/Hv1cw==
   dependencies:
     defu "^0.0.3"
     execa "^1.0.0"
@@ -6047,10 +6047,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-konva@^4.0.9:
-  version "4.0.9"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-4.0.9.tgz#0f90d8aa067d74c4ffe2887a13465b9230c98f06"
-  integrity sha512-ON2zKhMjdNGFT2H92rR6fowagfXz/1X1tfx/LqgNB1UVuaB6HIhFSLBhGoLem7psxUaKOHAO5g1Hlp1vdOXrJg==
+konva@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-4.0.10.tgz#1b4e188130e0a183fd6b2e3474767e0892a75a28"
+  integrity sha512-F9SQKxEPxBUtOe3qbXQhAlFg2uM3UZ7w5E2we6vRk6Rv8fuyIiV2UfasIX3ahxvJx57xmQq/UtO+ZL4qSlWe3w==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
