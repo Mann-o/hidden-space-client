@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    MainHeaderPageHeroContent(title="Our Therapists" :breadcrumbs="breadcrumbs")
+    MainHeaderPageHeroContent(title="Therapists" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="therapists")
       ModelPreview(
         v-for="{ id, slug, image, fullNameWithTitle, title, biography } in therapists"

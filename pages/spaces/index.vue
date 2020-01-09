@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    MainHeaderPageHeroContent(title="Our Spaces" :breadcrumbs="breadcrumbs")
+    MainHeaderPageHeroContent(title="Spaces" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="spaces")
       ModelPreview(
         v-for="{ id, slug, image, address, city } in spaces"

@@ -50,7 +50,6 @@ export default {
     },
     handleForm (e) {
       e.preventDefault()
-      console.log(this.practitionersForm)
     },
   },
 }
