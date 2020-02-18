@@ -1,11 +1,19 @@
 <template lang="pug">
   .main-footer-copyright
-    p &copy; Copyright 2019 - Hidden Space
+    p &copy; Copyright 2019-{{ currentYear }} - Hidden Space
 </template>
 
 <script>
+import { lightFormat } from 'date-fns'
+
 export default {
   name: 'MainFooterCopyright',
+
+  computed: {
+    currentYear () {
+      return lightFormat(new Date(), 'yyyy')
+    },
+  },
 }
 </script>
 
