@@ -8,8 +8,8 @@
         route="therapists"
         :slug="slug"
         :main-image="image != null ? image.url : null"
-        :title="fullNameWithTitle"
-        :subtitle="title"
+        :title="firstNames"
+        :subtitle="fullNameWithTitle"
         :brief="biography"
       )
 </template>
