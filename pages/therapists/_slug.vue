@@ -24,11 +24,11 @@
       h5(style="padding-bottom:2rem") Other Therapists
       ModelPreviewList
         ModelPreview(
-          v-for="{ id, slug, image, firstNames, fullNameWithTitle, title, biography } in otherTherapists"
+          v-for="{ id, slug, images, firstNames, fullNameWithTitle, title, biography } in otherTherapists"
           :key="id"
           route="therapists"
           :slug="slug"
-          :main-image="image != null ? image.url : null"
+          :main-image="images.length ? images[0].url : null"
           :title="firstNames"
           :subtitle="fullNameWithTitle"
           :brief="biography"
@@ -58,8 +58,8 @@ export default {
       ]
     },
     imageSrc () {
-      return (this.therapist.image != null)
-        ? this.therapist.image.url
+      return (this.therapist.images.length)
+        ? this.therapist.images[0].url
         : '/images/missing-avatar.png'
     },
   },

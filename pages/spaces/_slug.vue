@@ -18,11 +18,11 @@
       h5(style="padding-bottom:2rem") Other Spaces
       ModelPreviewList
         ModelPreview(
-          v-for="{ id, slug, image, address, city } in otherSpaces"
+          v-for="{ id, slug, images, address, city } in otherSpaces"
           :key="id"
           route="spaces"
           :slug="slug"
-          :main-image="image != null ? image.url : null"
+          :main-image="imageSrc"
           :title="address"
           :subtitle="city"
           brief="Some placeholder text"
@@ -52,8 +52,8 @@ export default {
       ]
     },
     imageSrc () {
-      return (this.space.image != null)
-        ? this.space.image.url
+      return (this.space.images.length)
+        ? this.space.images[0].url
         : '/images/missing-avatar.png'
     },
   },

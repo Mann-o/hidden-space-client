@@ -8,11 +8,11 @@
       h2 Our Spaces
       ModelPreviewList(v-if="spaces")
         ModelPreview(
-          v-for="{ id, slug, image, address, city } in spaces"
+          v-for="{ id, slug, images, address, city } in spaces"
           :key="id"
           route="spaces"
           :slug="slug"
-          :main-image="image != null ? image.url : null"
+          :main-image="images.length ? images[0].url : null"
           :title="address"
           :subtitle="city"
           brief="Some placeholder text"
@@ -42,11 +42,11 @@
       .page-index__therapists__list
         ModelPreviewList(v-if="filteredTherapists")
           ModelPreview(
-            v-for="{ id, key, slug, image, firstNames, lastNames, fullNameWithTitle, biography } in filteredTherapists"
+            v-for="{ id, key, slug, images, firstNames, lastNames, fullNameWithTitle, biography } in filteredTherapists"
             :key="id"
             route="therapists"
             :slug="slug"
-            :main-image="image != null ? image.url : null"
+            :main-image="images.length ? images[0].url : null"
             :title="`${firstNames} ${lastNames}`"
             :subtitle="fullNameWithTitle"
             :brief="biography"
