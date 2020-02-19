@@ -9,7 +9,7 @@
           h5.model-preview__title {{ title }}
           h6.model-preview__subtitle {{ subtitle }}
 
-        .model-preview__brief(v-html="`${brief.slice(0, 100)}...`")
+        .model-preview__brief(v-if="brief" v-html="`${brief.slice(0, 100)}...`")
 
         .model-preview__fake-link
           span View Full Details &raquo;
