@@ -3,7 +3,7 @@
     MainHeaderPageHeroContent(title="Therapists" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="therapists")
       ModelPreview(
-        v-for="{ id, slug, image, fullNameWithTitle, title, biography } in therapists"
+        v-for="{ id, slug, image, firstNames, fullNameWithTitle, title, biography } in therapists"
         :key="id"
         route="therapists"
         :slug="slug"

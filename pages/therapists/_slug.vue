@@ -24,13 +24,13 @@
       h5(style="padding-bottom:2rem") Other Therapists
       ModelPreviewList
         ModelPreview(
-          v-for="{ id, slug, image, fullNameWithTitle, title, biography } in otherTherapists"
+          v-for="{ id, slug, image, firstNames, fullNameWithTitle, title, biography } in otherTherapists"
           :key="id"
           route="therapists"
           :slug="slug"
           :main-image="image != null ? image.url : null"
-          :title="fullNameWithTitle"
-          :subtitle="title"
+          :title="firstNames"
+          :subtitle="fullNameWithTitle"
           :brief="biography"
         )
 </template>
