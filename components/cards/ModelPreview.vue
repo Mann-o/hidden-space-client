@@ -1,13 +1,23 @@
 <template lang="pug">
   Card
-    .model-preview
-      nuxt-link(:to="`/${route}/${slug}`")
+    .model-preview(:class="{ 'model-preview--multi': images && images.length > 1 }")
+      NuxtLink(:to="`/${route}/${slug}`")
 
-        .model-preview__image(:style="{ backgroundImage }")
+        carousel(
+          v-if="images && images.length"
+          :per-page="1"
+          :pagination-enabled="false"
+          navigation-enabled
+        )
+          slide(v-for="(image, index) in images" :key="index")
+            img(:src="image.url" :alt="image.alt_text")
+
+        .model-preview__image(v-else)
+          img(src="/images/missing-avatar.png" alt="Image(s) coming soon!")
 
         .model-preview__overview
           h5.model-preview__title {{ title }}
-          h6.model-preview__subtitle {{ subtitle }}
+          h6.model-preview__subtitle(v-if="subtitle") {{ subtitle }}
 
         .model-preview__brief(v-if="brief" v-html="`${brief.slice(0, 100)}...`")
 
@@ -34,9 +44,10 @@ export default {
       type: String,
       required: true,
     },
-    mainImage: {
-      required: true,
-      validator: (image) => ((typeof image === 'string') || (image == null)),
+    mainImageIndex: {
+      type: Number,
+      required: false,
+      default: () => null,
     },
     title: {
       type: String,
@@ -44,11 +55,17 @@ export default {
     },
     subtitle: {
       type: String,
-      required: true,
+      required: false,
+      default: () => null,
     },
     brief: {
       type: String,
       required: true,
+    },
+    images: {
+      type: Array,
+      required: false,
+      default: () => null,
     },
   },
 
@@ -71,36 +88,31 @@ export default {
 @import '~assets/styles/mixins/breakpoint'
 
 .model-preview
-  // max-width: 25rem
+  max-width: 25rem
   margin: 0 auto
 
   a
     text-decoration: none
     display: block
 
-    &:hover
+  // +has(image)
+  //   overflow: hidden
+  //   background-size: cover
+  //   background-position: center
+  //   width: 100%
+  //   height: 25rem
+  //   +breakpoint(desktop)
+  //     height: 25rem
 
-      .model-preview__image img
-        transform: scale(1.05)
-
-  +has(image)
-    overflow: hidden
-    background-size: cover
-    background-position: center
-    width: 100%
-    height: 25rem
-    +breakpoint(desktop)
-      height: 25rem
-
-    img
-      zoom: 2
-      display: block
-      margin: auto
-      height: auto
-      width: auto
-      max-height: 100%
-      max-width: 100%
-      transition: transform 0.2s
+  //   img
+  //     zoom: 2
+  //     display: block
+  //     margin: auto
+  //     height: auto
+  //     width: auto
+  //     max-height: 100%
+  //     max-width: 100%
+  //     transition: transform 0.2s
 
   +has(overview)
     padding-top: 1.6rem

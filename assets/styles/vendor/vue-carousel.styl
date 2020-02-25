@@ -1,0 +1,27 @@
+.VueCarousel-navigation
+  opacity: 0
+  pointer-events: none
+  transition: opacity 0.2s
+
+  &-prev
+    margin-right: none !important
+    margin-left: 4.2rem !important
+    color: #fff !important
+    outline: none !important
+
+  &-next
+    margin-left: none !important
+    margin-right: 4.2rem !important
+    color: #fff !important
+    outline: none !important
+
+.model-preview--multi,
+.page-therapists-slug__therapist-info__image,
+.page-spaces-slug__space-info__image
+  width: 25rem
+  height: 25rem
+
+  &:hover
+    .VueCarousel-navigation
+      opacity: 1
+      pointer-events: auto

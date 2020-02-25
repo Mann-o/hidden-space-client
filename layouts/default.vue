@@ -20,6 +20,7 @@ export default {
 
 <style lang="stylus">
 @import '~assets/styles/vendor/font-awesome'
+@import '~assets/styles/vendor/vue-carousel'
 
 @import '~assets/styles/utilities/reset'
 @import '~assets/styles/utilities/fonts'

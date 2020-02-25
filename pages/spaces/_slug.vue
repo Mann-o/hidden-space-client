@@ -10,19 +10,30 @@
         div(v-if="space.biography != null" v-html="space.biography" style="padding-top:4rem")
 
       .page-spaces-slug__space-info__image
-        img(:src="imageSrc")
+        carousel(
+          v-if="space.images && space.images.length"
+          :per-page="1"
+          :pagination-enabled="false"
+          navigation-enabled
+        )
+          slide(v-for="(image, index) in space.images" :key="index")
+            img(:src="image.url" :alt="image.alt_text")
+
+        img(v-else src="/images/missing-avatar.png" alt="Image(s) coming soon!")
+
         div(style="padding-top:2rem")
           nuxt-link.btn.btn--secondary(to="/contact-us") Book This Space
 
     .page-spaces-slug__other-spaces(v-if="otherSpaces.length" style="padding-top: 8rem")
       h5(style="padding-bottom:2rem") Other Spaces
       ModelPreviewList
-        ModelPreview(
+        ClientOnly: ModelPreview(
           v-for="{ id, slug, images, address, city } in otherSpaces"
           :key="id"
           route="spaces"
           :slug="slug"
-          :main-image="imageSrc"
+          :main-image="images.length ? 0 : null"
+          :images="images"
           :title="address"
           :subtitle="city"
           brief="Some placeholder text"
@@ -51,11 +62,11 @@ export default {
         { label: this.space.address },
       ]
     },
-    imageSrc () {
-      return (this.space.images.length)
-        ? this.space.images[0].url
-        : '/images/missing-avatar.png'
-    },
+    // imageSrc () {
+    //   return (this.space.images.length)
+    //     ? this.space.images[0].url
+    //     : '/images/missing-avatar.png'
+    // },
   },
 
   async asyncData ({
@@ -82,9 +93,12 @@ export default {
 .page-spaces-slug
 
   +has(space-info)
-    display: grid
-    grid-template-columns: repeat(2, 1fr)
-    grid-gap: 4rem
+    display: flex
+    justify-content: space-between
+    padding-bottom: 8rem
+
+    +has(overview)
+      padding-right: 8rem
 
     +has(image)
       text-align: right

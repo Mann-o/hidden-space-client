@@ -2,6 +2,9 @@
   .page-contact-us
     MainHeaderPageHeroContent(title="Contact Us" :breadcrumbs="breadcrumbs")
 
+    .page-contact-us__image
+      img(src="https://d6d9dbp41whrq.cloudfront.net/88cda2987f8e4e32a3e4d766da138aaf.jpg" alt="Picton Manor Outside")
+
     .page-contact-us__contact-info
       h2 Get in Touch
       .page-contact-us__contact-info__grid
@@ -41,8 +44,12 @@ export default {
 <style lang="stylus" scoped>
 @import '~assets/styles/core/variables'
 @import '~assets/styles/mixins/bem'
+@import '~assets/styles/mixins/breakpoint'
 
 .page-contact-us
+
+  +has(image)
+    padding-bottom: 4rem
 
   +has(contact-info)
 
@@ -89,4 +96,13 @@ export default {
 
       &:last-of-type
         padding-top: 1rem
+
+  +breakpoint(desktop)
+
+    +has(image)
+      float: right
+
+      img
+        max-width: 50rem
+        border: 1rem solid rgba(66, 45, 150, 0.4)
 </style>

@@ -7,12 +7,13 @@
     .page-index__spaces
       h2 Our Spaces
       ModelPreviewList(v-if="spaces")
-        ModelPreview(
+        ClientOnly: ModelPreview(
           v-for="{ id, slug, images, address, city } in spaces"
           :key="id"
           route="spaces"
           :slug="slug"
-          :main-image="images.length ? images[0].url : null"
+          :main-image-index="images.length ? 0 : null"
+          :images="images"
           :title="address"
           :subtitle="city"
           brief="Some placeholder text"
@@ -23,12 +24,12 @@
 
     .page-index__therapists
       h2 Our Therapists
-      .page-index__therapists__filters
-        CustomSelect(
-          placeholder-text="Gender"
-          :options="[{ key: 'male', value: 'Male' }, { key: 'female', value: 'Female' }]"
-          v-model="therapistFilters.gender"
-        )
+      //- .page-index__therapists__filters
+      //-   CustomSelect(
+      //-     placeholder-text="Gender"
+      //-     :options="[{ key: 'male', value: 'Male' }, { key: 'female', value: 'Female' }]"
+      //-     v-model="therapistFilters.gender"
+      //-   )
         //- CustomSelect(
         //-   placeholder-text="Practice"
         //-   :options="[]"
@@ -39,18 +40,19 @@
         //-   :options="[]"
         //-   v-model="therapistFilters.treatment"
         //- )
-      .page-index__therapists__list
-        ModelPreviewList(v-if="filteredTherapists")
-          ModelPreview(
-            v-for="{ id, key, slug, images, firstNames, lastNames, fullNameWithTitle, biography } in filteredTherapists"
-            :key="id"
-            route="therapists"
-            :slug="slug"
-            :main-image="images.length ? images[0].url : null"
-            :title="`${firstNames} ${lastNames}`"
-            :subtitle="fullNameWithTitle"
-            :brief="biography"
-          )
+      //- .page-index__therapists__list
+      ClientOnly: ModelPreviewList(v-if="therapists")
+        ModelPreview(
+          v-for="{ id, key, slug, images, firstNames, lastNames, treatment, biography } in therapists"
+          :key="id"
+          route="therapists"
+          :slug="slug"
+          :main-image-index="images.length ? 0 : null"
+          :images="images"
+          :title="`${firstNames} ${lastNames}`"
+          :subtitle="treatment"
+          :brief="biography"
+        )
 
       .page-index__therapists__actions
         nuxt-link.button.button--secondary(to="/therapists") View All
@@ -69,24 +71,24 @@ export default {
   },
 
   data: () => ({
-    therapistFilters: {
-      gender: null,
-      practice: null,
-      treatment: null,
-    },
+    // therapistFilters: {
+    //   gender: null,
+    //   practice: null,
+    //   treatment: null,
+    // },
     therapists: null,
     spaces: null,
   }),
 
-  computed: {
-    filteredTherapists () {
-      return (this.therapistFilters.gender == null)
-        ? this.therapists
-        : this.therapists.filter(({ gender }) => {
-          return (gender === this.therapistFilters.gender.key)
-        })
-    },
-  },
+  // computed: {
+  //   filteredTherapists () {
+  //     return (this.therapistFilters.gender == null)
+  //       ? this.therapists
+  //       : this.therapists.filter(({ gender }) => {
+  //         return (gender === this.therapistFilters.gender.key)
+  //       })
+  //   },
+  // },
 
   async asyncData ({ app: { $axios }, store }) {
     const [{ data: spaces }, { data: therapists }] = await Promise.all([
@@ -123,13 +125,16 @@ export default {
 
   +has(therapists)
 
-    +has(filters)
-      padding-top: 2rem
+    h2
       padding-bottom: 4rem
-      display: flex
 
-      .custom-select
-        margin-right: 4rem
+    // +has(filters)
+    //   padding-top: 2rem
+    //   padding-bottom: 4rem
+    //   display: flex
+
+    //   .custom-select
+    //     margin-right: 4rem
 
     +has(actions)
       padding-top: 8rem

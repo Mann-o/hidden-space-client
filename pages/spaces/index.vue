@@ -2,12 +2,13 @@
   div
     MainHeaderPageHeroContent(title="Spaces" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="spaces")
-      ModelPreview(
+      ClientOnly: ModelPreview(
         v-for="{ id, slug, images, address, city } in spaces"
         :key="id"
         route="spaces"
         :slug="slug"
-        :main-image="images.length ? images[0].url : null"
+        :main-image-index="images.length ? 0 : null"
+        :images="images"
         :title="address"
         :subtitle="city"
         brief="Some placeholder text"

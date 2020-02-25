@@ -2,14 +2,15 @@
   div
     MainHeaderPageHeroContent(title="Therapists" :breadcrumbs="breadcrumbs")
     ModelPreviewList(v-if="therapists")
-      ModelPreview(
-        v-for="{ id, slug, images, firstNames, fullNameWithTitle, title, biography } in therapists"
+      ClientOnly: ModelPreview(
+        v-for="{ id, slug, images, firstNames, treatment, title, biography } in therapists"
         :key="id"
         route="therapists"
         :slug="slug"
-        :main-image="images.length ? images[0].url : null"
+        :main-image="images.length ? 0 : null"
+        :images="images"
         :title="firstNames"
-        :subtitle="fullNameWithTitle"
+        :subtitle="treatment"
         :brief="biography"
       )
 </template>

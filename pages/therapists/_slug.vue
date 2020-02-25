@@ -1,18 +1,28 @@
 <template lang="pug">
   .page-therapists-slug
-    MainHeaderPageHeroContent(v-if="therapist != null" :title="`${therapist.fullNameWithTitle}`" :breadcrumbs="breadcrumbs")
+    MainHeaderPageHeroContent(v-if="therapist != null" :title="`${therapist.fullName}`" :breadcrumbs="breadcrumbs")
 
     .page-therapists-slug__therapist-info
 
       .page-therapists-slug__therapist-info__overview
-        h5 {{ therapist.fullNameWithTitle }}
-        h6 {{ therapist.title }}
+        h5 {{ therapist.fullName }}
+        h6 {{ therapist.treatment }}
         div(v-if="therapist.biography != null" v-html="therapist.biography" style="padding-top:4rem")
 
       .page-therapists-slug__therapist-info__image
-        img(:src="imageSrc")
-        div(style="padding-top:2rem")
-          nuxt-link.btn.btn--secondary(to="/contact-us") Book This Therapist
+        .page-spaces-slug__space-info__image
+          carousel(
+            v-if="therapist.images && therapist.images.length"
+            :per-page="1"
+            :pagination-enabled="false"
+            navigation-enabled
+          )
+            slide(v-for="(image, index) in therapist.images" :key="index")
+              img(:src="image.url" :alt="image.alt_text")
+
+          img(v-else src="/images/missing-avatar.png" alt="Image(s) coming soon!")
+        //- div(style="padding-top:2rem")
+        //-   nuxt-link.btn.btn--secondary(to="/contact-us") Book This Therapist
         div(style="padding-top:2rem")
           h5(style="font-size:1.4rem") Telephone
           span {{ therapist.telephoneNumber }}
@@ -23,14 +33,15 @@
     .page-therapists-slug__other-therapists(v-if="otherTherapists.length" style="padding-top: 8rem")
       h5(style="padding-bottom:2rem") Other Therapists
       ModelPreviewList
-        ModelPreview(
-          v-for="{ id, slug, images, firstNames, fullNameWithTitle, title, biography } in otherTherapists"
+        ClientOnly: ModelPreview(
+          v-for="{ id, slug, images, firstNames, treatment, title, biography } in otherTherapists"
           :key="id"
           route="therapists"
           :slug="slug"
-          :main-image="images.length ? images[0].url : null"
+          :main-image="images.length ? 0 : null"
+          :images="images"
           :title="firstNames"
-          :subtitle="fullNameWithTitle"
+          :subtitle="treatment"
           :brief="biography"
         )
 </template>
@@ -54,7 +65,7 @@ export default {
     breadcrumbs () {
       return [
         { to: '/therapists', label: 'Therapists' },
-        { label: this.therapist.fullNameWithTitle },
+        { label: this.therapist.fullName },
       ]
     },
     imageSrc () {
@@ -88,9 +99,12 @@ export default {
 .page-therapists-slug
 
   +has(therapist-info)
-    display: grid
-    grid-template-columns: repeat(2, 1fr)
-    grid-gap: 4rem
+    display: flex
+    justify-content: space-between
+    padding-bottom: 8rem
+
+    +has(overview)
+      padding-right: 8rem
 
     +has(image)
       text-align: right
