@@ -3,14 +3,15 @@
     .model-preview(:class="{ 'model-preview--multi': images && images.length > 1 }")
       NuxtLink(:to="`/${route}/${slug}`")
 
-        carousel(
-          v-if="images && images.length"
-          :per-page="1"
-          :pagination-enabled="false"
-          navigation-enabled
-        )
-          slide(v-for="(image, index) in images" :key="index")
-            img(:src="image.url" :alt="image.alt_text")
+        .model-preview__image
+          carousel(
+            v-if="images && images.length"
+            :per-page="1"
+            :pagination-enabled="false"
+            navigation-enabled
+          )
+            slide(v-for="(image, index) in images" :key="index")
+              img(:src="image.url" :alt="image.alt_text")
 
         .model-preview__image(v-else)
           img(src="/images/missing-avatar.png" alt="Image(s) coming soon!")
