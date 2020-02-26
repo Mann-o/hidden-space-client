@@ -96,6 +96,10 @@ export default {
     text-decoration: none
     display: block
 
+  +has(image)
+    overflow: hidden
+    height: 25rem
+
   // +has(image)
   //   overflow: hidden
   //   background-size: cover
